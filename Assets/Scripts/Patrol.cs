@@ -8,7 +8,7 @@ public class Patrol : MonoBehaviour
     [SerializeField] private Transform _path;
     [SerializeField] private Transform[] _points;
 
-     Enemy _enemy;
+    private Enemy _enemy;
     private int _currentPoint=0;
 
     private void OnEnable()
@@ -23,12 +23,11 @@ public class Patrol : MonoBehaviour
        _enemy =  Instantiate(_templay, _points[0].position, Quaternion.identity);
     }
 
-    // Update is called once per frame
     void Update()
     {
         Transform target = _points[_currentPoint];
 
-        _enemy.transform.position = Vector3.MoveTowards(_enemy.transform.position, target.position, _enemy.GetSpeed * Time.deltaTime);
+        _enemy.transform.position = Vector3.MoveTowards(_enemy.transform.position, target.position, _enemy.Speed * Time.deltaTime);
 
         if(_enemy.transform.position == target.position)
         {
@@ -39,7 +38,6 @@ public class Patrol : MonoBehaviour
                 _currentPoint = 0;
             }
         }
-
     }
 
     private void OnDisable()
